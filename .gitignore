@@ -1,0 +1,37 @@
+# Node Dependencies. Node_modules contains all npm-dependent files related to the Angular APP
+# It is large (several hundred MB), and with the npm install command, execution can be generated automatically 
+# You don't store several dependent datasets on GitHub
+# but only package.json and package-lock.json so that they are reproduceable 
+
+ node_modules/
+
+# Angular Build Output. This is generated after the execution of the ng build command
+# This contains code generated from the source code after the build command
+# This can be generated after every build command, hence need not be stored in the repository
+
+dist/
+
+# Terraform files
+# .tfstate and .tfstate.backup contain the current status of your infrastructure
+
+*.tfstate
+*.tfstate.backup
+
+# .terraform contains Terraform-Plugins and Module-Downloads
+# These data are machine dependent and often sensitive (for ex:, it can contain login details)
+# In teams or during CI/CD, it is better to save it remotely (for ex:- S3 with locking) but never in Git
+
+.terraform/
+
+# IDE and System Files
+
+# .vscode stores personalized editor settings that can vary with every developer
+.vscode/
+
+# .DS_Store is macOS system data for directory representation - irrelevant for this project
+.DS_Store
+
+# .log contains temporary protocol details (for ex: from Node.js, TerraForm or npm), not relevant for code versions
+*.log
+
+
