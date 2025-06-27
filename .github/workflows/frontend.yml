@@ -21,6 +21,8 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+        working-directory: DummyUI
 
       - name: Build Angular App
         run: ng build --configuration production
+        working-directory: DummyUI
