@@ -1,0 +1,17 @@
+<div class="books-list-wrapper">
+  <mat-toolbar color="primary" class="books-list-toolbar">
+    <span class="user-Id">Dummy Users List</span>
+  </mat-toolbar>
+
+  <div class="books-grid" *ngIf="dummyTable.length > 0 && dummyTable!=null">
+    <mat-card class="book-card" *ngFor="let users of dummyTable ">
+      <mat-card-header>
+        <mat-card-title class="user-Id">User Id: {{users.id}}</mat-card-title>
+        <mat-card-subtitle class="user-Name">Name: {{users.name}}</mat-card-subtitle>
+      </mat-card-header>
+
+    </mat-card>
+  </div>
+  <p *ngIf="dummyTable.length <= 0 || dummyTable==null">No Users Found</p>
+</div>
+

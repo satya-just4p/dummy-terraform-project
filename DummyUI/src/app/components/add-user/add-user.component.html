@@ -1,0 +1,24 @@
+<div class="login-wrapper">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title class="title-center">Add Dummy User</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form #form="ngForm">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput type="name" name="name" id="name"
+           required [(ngModel)] = "dummyTable.name"/>
+        </mat-form-field>
+         </form>
+      
+       <button mat-raised-button color="primary" class="full-width login-button" type="button"
+       (click)="addUserRequest()">
+          Add User
+        </button>
+       
+     </mat-card-content>
+  </mat-card>
+</div>
+

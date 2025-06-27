@@ -1,0 +1,31 @@
+.books-list-wrapper {
+  padding: 20px;
+  background-color: #a5b8ef; /* match page bg */
+  min-height: 80vh;
+}
+
+.books-list-toolbar {
+  margin-bottom: 20px;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.book-card {
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.user-id{
+font-family: 'Trebuchet MS'!important;
+font-size: medium !important
+}
+.user-name{
+  font-family:'Trebuchet MS' !important;
+  font-size: small !important;
+}
