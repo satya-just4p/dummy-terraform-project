@@ -37,25 +37,25 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws_access_key_id: ${{secrets.aws_access_key_id}}
-          aws_secret_access_key: ${{secrets.aws_secret_access_key}}
-          aws_region: ${{secrets.aws_region}}
+          aws-access-key-id: ${{secrets.aws_access_key_id}}
+          aws-secret-access-key: ${{secrets.aws_secret_access_key}}
+          aws-region: ${{secrets.aws_region}}
 
       - name: Sync to S3
         run: aws s3 sync ./dist/dummy-ui/browser s3://${{secrets.s3_bucket_name}} --delete
         env:
-          s3_bucket_name: ${{secrets.s3_bucket_name}}
-          aws_access_key_id: ${{secrets.aws_access_key_id}}
-          aws_secret_access_key: ${{secrets.aws_secret_access_key}}
-          aws_region: ${{secrets.aws_region}}
-          source_dir: dist/dummy-ui/browser 
+          s3-bucket-name: ${{secrets.s3_bucket_name}}
+          aws-access-key-id: ${{secrets.aws_access_key_id}}
+          aws-secret-access-key: ${{secrets.aws_secret_access_key}}
+          aws-region: ${{secrets.aws_region}}
+          source-dir: dist/dummy-ui/browser 
 
       - name: Invalidate CloudFront Cache
         uses: chetan/invalidate-cloudfront-action@v2
         with:
-          cloud_distribution_id: ${{secrets.cloud_distribution_id}}
+          distribution-id: ${{secrets.cloud_distribution_id}}
           paths: "/*"
         env:
-          aws_access_key_id: ${{secrets.aws_access_key_id}}
-          aws_secret_access_key: ${{secrets.aws_secret_access_key}}
-          aws_region: ${{secrets.aws_region}}
+          aws-access-key-id: ${{secrets.aws_access_key_id}}
+          aws-secret-access-key: ${{secrets.aws_secret_access_key}}
+          aws-region: ${{secrets.aws_region}}
