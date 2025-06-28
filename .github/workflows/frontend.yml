@@ -26,6 +26,36 @@ jobs:
       - name: Install Angular CLI
         run : npm install -g @angular/cli
 
+      - name: Replace API URL in environment.prod.ts
+        run: sed -i "s|REPLACE_ME_BASE_API_URL |${{secrets.API_URL}}|g" ./src/environments/environment.prod.ts
+        working-directory: DummyUI
+
       - name: Build Angular App
         run: ng build --configuration production
         working-directory: DummyUI
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_REGION: ${{secrets.AWS_REGION}}
+
+      - name: Sync to S3
+        run: aws s3 sync ./dist/dummy-ui/browser s3://$AWS_S3_BUCKET --delete
+        env:
+          S3_BUCKET_NAME: ${{secrets.S3_BUCKET_NAME}}
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_REGION: ${{secrets.AWS_REGION}}
+          SOURCE_DIR: dist/dummy-ui/browser 
+
+      - name: Invalidate CloudFront Cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        with:
+          CLOUD_DISTRIBUTION_ID: ${{secrets.CLOUD_DISTRIBUTION_ID}}
+          paths: "/*"
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_REGION: ${{secrets.AWS_REGION}}
