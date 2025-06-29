@@ -27,7 +27,7 @@ jobs:
         run : npm install -g @angular/cli
 
       - name: Replace API URL in environment.prod.ts
-        run: sed -i "s|REPLACE_ME_BASE_API_URL |${{secrets.api_url}}|g" ./src/environments/environment.prod.ts
+        run: sed -i "s|REPLACE_ME_BASE_API_URL|${{secrets.api_url}}|g" ./src/environments/environment.prod.ts
         working-directory: DummyUI
 
       - name: Build Angular App
