@@ -10,6 +10,10 @@ output "angular_cloudfront_domain_name"{
     description = "Cloudfront domain name for Angular frontend"
     value = aws_cloudfront_distribution.angular_cdn.domain_name
 }
+output "angular_cloudfront_distribution_id"{
+    description = "CloudFront Distribution Id"
+    value = aws_cloudfront_distribution.angular_cdn.id
+}
 output "vpc_id"{
     description = "VPC ID for Dummy Project"
     value = aws_vpc.dummy_vpc.id
