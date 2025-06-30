@@ -39,3 +39,6 @@ variable "db_password"{
 variable "db_name"{
     default = "dummydb"
 }
+variable "cicd_user_name"{
+    default = "ci-cd-angular-user"
+}

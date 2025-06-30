@@ -64,3 +64,16 @@ output "angular_base_api_url"{
     description = "Base API URL for Angular app to call API gateway"
     value = aws_apigatewayv2_stage.dummy_stage.invoke_url
 }
+
+# Access Key and Secret Access Key output
+output "cicd_user_access_key_id"{
+    value = aws_iam_access_key.cicd_user_keys.id
+    description = "Access key ID for CI/CD user"
+    sensitive = true
+}
+
+output "cicd_user_secret_access_key"{
+    value = aws_iam_access_key.cicd_user_keys.secret
+    description = "Secret Access Key ID for CI/CD User"
+    sensitive = true
+}
