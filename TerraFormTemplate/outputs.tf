@@ -77,3 +77,9 @@ output "cicd_user_secret_access_key"{
     description = "Secret Access Key ID for CI/CD User"
     sensitive = true
 }
+
+output "bastion_private_key"{
+    value = tls_private_key.bastion_key.private_key_pem
+    description = "EC2 bastion host RSA Private Key"
+    sensitive = true
+}

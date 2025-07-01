@@ -1,0 +1,59 @@
+name: Infrastructure CI Pipeline
+on:
+  workflow_dispatch:
+    
+jobs:
+  terraform:
+    name: Apply Terraform Templates
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: TerraFormTemplate
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{secrets.tf_aws_access_key_id}}
+          aws-secret-access-key: ${{secrets.tf_aws_secret_access_key}}
+          aws-region: ${{secrets.aws_region}}
+
+      - name: Terraform init
+        run: terraform init
+      
+      - name: Terraform Validate
+        run: terraform validate
+      
+      - name: Terraform Plan
+        run: terraform plan
+      
+      - name: Terraform apply
+        run: terraform apply -auto-approve
+
+      - name: Show Terraform Outputs
+        run: |
+          echo "============= TerraForm Outputs ============="
+          terraform output -json
+      - name: Display selected Terraform Outputs
+        run: |
+          echo "CloudDistribution Id: $(terraform output -raw angular_cloudfront_distribution_id)"
+          echo "API Gateway URL: $(terraform output -raw angular_base_api_url)"
+          echo "S3 Bucket name: $(terraform output -raw s3_bucket_name)"
+          echo "Bastion Private Key (1st line):"
+          terraform output -raw bastion_private_key | head -n 1
+          echo "AWS Access Key for Angular CI/CD :"
+          terraform output -raw cicd_user_access_key_id
+          echo "AWS Secret Key for Angular CI/CD:"
+          terraform output -raw cicd_user_secret_access_key
+          echo "=============== Terraform Outputs ends ==============="
+
+
+
