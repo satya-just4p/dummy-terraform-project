@@ -27,8 +27,14 @@ jobs:
       - name: Terraform Init -reconfigure
         run: terraform init -reconfigure
 
+      - name: Terraform Import S3 Bucket
+        run: terraform import aws_s3_bucket.tf_state_bucket dummy-tfstate-bucket
+
+      - name: Terraform Import Dynamodb Table
+        run: terraform import aws_dynamodb_table.tf_lock_table tfstate-lock-table
+
       - name: Terraform Destroy
         run: terraform destroy -target=aws_s3_bucket.tf_state_bucket
-        
+
       - name: Terraform Destroy
         run: terraform destroy -target=aws_dynamodb_table.tf_lock_table
