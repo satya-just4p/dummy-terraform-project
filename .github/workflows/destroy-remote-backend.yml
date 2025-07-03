@@ -1,0 +1,31 @@
+name: Destroy Remote Backend
+on:
+  workflow_dispatch:
+jobs:
+  destroy:
+    name: Destroy Remote Backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: TerraFormTemplate/remote-backend
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup TerraForm
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{secrets.tf_aws_access_key_id}}
+          aws-secret-access-key: ${{secrets.tf_aws_secret_access_key}}
+          aws-region: ${{secrets.aws_region}}
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve

@@ -1,9 +1,9 @@
 resource "aws_s3_bucket" "tf_state_bucket"{
     bucket = var.bucket_name
 
-    lifecycle{
-        prevent_destroy = true
-    }
+#    lifecycle{
+#        prevent_destroy = true
+#    }
 
     force_destroy = true
 
@@ -31,9 +31,9 @@ resource "aws_dynamodb_table" "tf_lock_table"{
     billing_mode = "PAY_PER_REQUEST"
 
 
-    lifecycle{
-        prevent_destroy = true
-    }
+#    lifecycle{
+#        prevent_destroy = true
+#    }
 
     hash_key = "LockID"
 
