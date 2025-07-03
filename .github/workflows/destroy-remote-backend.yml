@@ -25,7 +25,7 @@ jobs:
           aws-region: ${{secrets.aws_region}}
 
       - name: Terraform Init -reconfigure
-        run: terraform init
+        run: terraform init -reconfigure
 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
