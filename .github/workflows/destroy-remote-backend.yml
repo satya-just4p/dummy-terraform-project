@@ -28,4 +28,7 @@ jobs:
         run: terraform init -reconfigure
 
       - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+        run: terraform destroy -target=aws_s3_bucket.tf_state_bucket
+        
+      - name: Terraform Destroy
+        run: terraform destroy -target=aws_dynamodb_table.tf_lock_table
