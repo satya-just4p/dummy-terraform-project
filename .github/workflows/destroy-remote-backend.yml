@@ -24,7 +24,7 @@ jobs:
           aws-secret-access-key: ${{secrets.tf_aws_secret_access_key}}
           aws-region: ${{secrets.aws_region}}
 
-      - name: Terraform Init
+      - name: Terraform Init -reconfigure
         run: terraform init
 
       - name: Terraform Destroy
