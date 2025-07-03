@@ -34,7 +34,7 @@ jobs:
         run: terraform import aws_dynamodb_table.tf_lock_table tfstate-lock-table
 
       - name: Terraform Destroy
-        run: terraform destroy
+        run: terraform destroy -auto-approve
         #run: terraform destroy -target=aws_s3_bucket.tf_state_bucket -auto-approve
 
       #- name: Terraform Destroy
