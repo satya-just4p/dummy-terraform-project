@@ -4,8 +4,8 @@ resource "aws_s3_bucket" "angular_bucket"{
     force_destroy = true
 
     tags = {
-        Name = "Angular Bookstore Static Site"
-        Environment = "Production"
+        Name = "Angular Dummy Project Static Site"
+        Environment = "Development"
     }
 }
 
@@ -88,8 +88,8 @@ resource "aws_cloudfront_distribution" "angular_cdn"{
     }
 
     tags = {
-        Environment = "Production"
-        Project = "BookstoreWebApp"
+        Environment = "Development"
+        Project = "DummyProject"
 
     }
 }

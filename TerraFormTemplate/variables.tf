@@ -8,6 +8,14 @@ variable "angular_s3_bucket_name"{
     default = "dummyprojectbucket.1981"
 }
 
+# Below is the name of the S3 bucket that stores Bastion Private Key
+
+variable "bastion_private_key"{
+    description = "S3 Bucket to store Bastion Private Key"
+    type = string
+    default = "bastion-private-key.1981"
+}
+
 variable "vpc_cidr"{
     default = "10.0.0.0/16"
 }

@@ -35,11 +35,11 @@ output "dummy_bastion_host_ip"{
     value = aws_instance.dummy_bastion_instance.public_ip
 }
 
-output "bastion_ssh_command"{
-    description = "SSH command to connect to the Bastion Host"
-    value = "ssh -i ${tls_private_key.bastion_key.private_key_pem} ec2-user@${aws_instance.dummy_bastion_instance.public_ip}"
-    sensitive = true
-}
+# output "bastion_ssh_command"{
+#    description = "SSH command to connect to the Bastion Host"
+#    value = "ssh -i ${tls_private_key.bastion_key.private_key_pem} ec2-user@${aws_instance.dummy_bastion_instance.public_ip}"
+#    sensitive = true
+#}
 
 output "rds_endpoint"{
     description = "Amazon RDS endpoint for database connection"
@@ -58,11 +58,13 @@ output "lambda_function_name"{
 output "lambda_function_url"{
     description = "Lambda Function URL to check if Dot Net API is properly deployed"
     value = aws_lambda_function_url.dummy_lambda_function_url.function_url
+    sensitive = false
 }
 
 output "angular_base_api_url"{
     description = "Base API URL for Angular app to call API gateway"
     value = aws_apigatewayv2_stage.dummy_stage.invoke_url
+    sensitive = false
 }
 
 # Access Key and Secret Access Key output
@@ -78,8 +80,8 @@ output "cicd_user_secret_access_key"{
     sensitive = true
 }
 
-output "bastion_private_key"{
-    value = tls_private_key.bastion_key.private_key_pem
-    description = "EC2 bastion host RSA Private Key"
-    sensitive = true
-}
+#output "bastion_private_key"{
+#    value = tls_private_key.bastion_key.private_key_pem
+#    description = "EC2 bastion host RSA Private Key"
+#    sensitive = true
+#}

@@ -45,18 +45,15 @@ jobs:
 
       - name: Sync to S3
         run: aws s3 sync ./dist/dummy-ui/browser s3://${{secrets.s3_bucket_name}} --delete
-        env:
-          s3-bucket-name: ${{secrets.s3_bucket_name}}
-          aws-access-key-id: ${{secrets.aws_access_key_id}}
-          aws-secret-access-key: ${{secrets.aws_secret_access_key}}
-          aws-region: ${{secrets.aws_region}}
-          source-dir: dist/dummy-ui/browser 
+        #env:
+        #  s3-bucket-name: ${{secrets.s3_bucket_name}}
+        #  aws-access-key-id: ${{secrets.aws_access_key_id}}
+        #  aws-secret-access-key: ${{secrets.aws_secret_access_key}}
+        #  aws-region: ${{secrets.aws_region}}
+        #  source-dir: dist/dummy-ui/browser 
 
       - name: Invalidate CloudFront Cache
-        uses: chetan/invalidate-cloudfront-action@v2
-        env:
-          DISTRIBUTION: ${{secrets.cloud_distribution_id}}
-          PATHS: "/*"
-          aws-access-key-id: ${{secrets.aws_access_key_id}}
-          aws-secret-access-key: ${{secrets.aws_secret_access_key}}
-          aws-region: ${{secrets.aws_region}}
+        run: |
+          aws cloudfront create-invalidation\
+          --distribution-id ${{secrets.cloud_distribution_id}}
+          --paths "/*"
