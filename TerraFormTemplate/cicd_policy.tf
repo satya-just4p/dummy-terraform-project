@@ -21,7 +21,8 @@ resource "aws_iam_policy" "cicd_angular_policy"{
         {
             Effect = "Allow",
             Action = [
-                "cloudfront:CreateInvalidation"
+                "cloudfront:CreateInvalidation",
+                "cloudfront:CreateInvalidationForDistributionTenant"
             ],
             Resource = "*"
         }
