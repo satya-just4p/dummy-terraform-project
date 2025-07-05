@@ -54,7 +54,7 @@ jobs:
 
       - name: Invalidate CloudFront Cache (Via AWS CLI)
         run: |
-          aws cloudfront create-invalidation\
+          aws cloudfront create-invalidation-for-distribution-tenant\
           --distribution-id "${{secrets.cloud_distribution_id}}"\
           --invalidation-batch '{
             "Paths":{
