@@ -52,8 +52,14 @@ jobs:
         #  aws-region: ${{secrets.aws_region}}
         #  source-dir: dist/dummy-ui/browser 
 
-      - name: Invalidate CloudFront Cache
+      - name: Invalidate CloudFront Cache (Via AWS CLI)
         run: |
-          aws cloudfront create-invalidation-for\
-          -distribution-tenant ${{secrets.cloud_distribution_id}}
-          --paths "/*"
+          aws cloudfront create-invalidation\
+          --distribution-id "${{secrets.cloud_distribution_id}}"\
+          --invalidation-batch '{
+            "Paths":{
+              "Quantity": 1,
+              "Items":["/*"]
+            },
+              "CallerReference":"'$(date +%s)'"
+          }'
