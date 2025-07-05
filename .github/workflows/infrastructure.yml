@@ -43,6 +43,22 @@ jobs:
 
       - name: Install GitHub CLI
         run: sudo apt-get update && sudo apt-get install gh -y
+    
+
+      - name: Show Terraform Outputs
+        run: |
+          echo "============= TerraForm Outputs ============="
+          terraform output -json
+      #- name: Display selected Terraform Outputs
+       # run: |
+        #  echo "CloudDistribution Id: $(terraform output -raw angular_cloudfront_distribution_id)"
+         # echo "API Gateway URL: $(terraform output -raw angular_base_api_url)"
+          #echo "S3 Bucket name: $(terraform output -raw s3_bucket_name)"
+          #echo "AWS Access Key for Angular CI/CD :"
+          #terraform output -raw cicd_user_access_key_id
+          #echo "AWS Secret Key for Angular CI/CD:"
+          #terraform output -raw cicd_user_secret_access_key
+          #echo "=============== Terraform Outputs ends ==============="
 
       - name: Export Terraform Outputs as GitHub Secrets
         env:
@@ -64,21 +80,6 @@ jobs:
           gh secret set AWS_SECRET_ACCESS_KEY -b "$cicd-secret-access-key"
 
           echo "======== GitHub Secrets updated successfully================"
-
-      - name: Show Terraform Outputs
-        run: |
-          echo "============= TerraForm Outputs ============="
-          terraform output -json
-      #- name: Display selected Terraform Outputs
-       # run: |
-        #  echo "CloudDistribution Id: $(terraform output -raw angular_cloudfront_distribution_id)"
-         # echo "API Gateway URL: $(terraform output -raw angular_base_api_url)"
-          #echo "S3 Bucket name: $(terraform output -raw s3_bucket_name)"
-          #echo "AWS Access Key for Angular CI/CD :"
-          #terraform output -raw cicd_user_access_key_id
-          #echo "AWS Secret Key for Angular CI/CD:"
-          #terraform output -raw cicd_user_secret_access_key
-          #echo "=============== Terraform Outputs ends ==============="
 
 
 
