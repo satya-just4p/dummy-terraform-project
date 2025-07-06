@@ -8,7 +8,7 @@ on:
     
 jobs:
   terraform:
-    if: ${{github.event.worflow_run.conclusion == 'success'}}
+    if: ${{github.event.workflow_run.conclusion == 'success'}}
     name: Apply Terraform Templates
     runs-on: ubuntu-latest
     defaults:
