@@ -1,12 +1,17 @@
 name : Angular CI Pipeline
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "infrastructure"
+    types:
+      - completed
     
 #  push:
 #    branches:
 #      - "main"
 jobs:
   build:
+    if: ${{github.events.workflow_run.conclusion == 'success'}}
     name: Build Angular App
     runs-on: ubuntu-latest
     defaults:

@@ -1,9 +1,14 @@
 name: Infrastructure CI Pipeline
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "remote-backend"
+    types:
+      - completed
     
 jobs:
   terraform:
+    if: ${{github.event.worflow_run.conclusion == 'success'}}
     name: Apply Terraform Templates
     runs-on: ubuntu-latest
     defaults:
