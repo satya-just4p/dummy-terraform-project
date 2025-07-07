@@ -1,6 +1,9 @@
 name: Remote-Backend for Terraform State
 on:
   workflow_dispatch:
+permissions:
+      id-token: write
+      contents: read
 
 jobs:
   terraform:
@@ -9,9 +12,7 @@ jobs:
     defaults:
       run:
         working-directory: TerraFormTemplate/remote-backend
-    permissions:
-      id-token: write
-      contents: read
+    
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3

@@ -5,6 +5,9 @@ on:
       - "Infrastructure CI Pipeline"
     types:
       - completed
+permissions:
+      id-token: write
+      contents: read
     
 #  push:
 #    branches:
@@ -16,9 +19,7 @@ jobs:
       github.event.workflow_run.head_branch == 'main'
     name: Build Angular App
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
+    
     defaults:
       run:
         working-directory: DummyUI
