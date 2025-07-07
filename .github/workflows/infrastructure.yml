@@ -17,6 +17,9 @@ jobs:
     defaults:
       run:
         working-directory: TerraFormTemplate
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout Code

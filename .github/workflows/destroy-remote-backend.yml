@@ -5,6 +5,9 @@ jobs:
   destroy:
     name: Destroy Remote Backend
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     defaults:
       run:
         working-directory: TerraFormTemplate/remote-backend

@@ -9,6 +9,9 @@ jobs:
     defaults:
       run:
         working-directory: TerraFormTemplate/remote-backend
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3

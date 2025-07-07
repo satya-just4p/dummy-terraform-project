@@ -5,6 +5,9 @@ jobs:
   destroy:
     name: Destroy Terraform infrastructure
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     defaults:
       run:
         working-directory: TerraFormTemplate
