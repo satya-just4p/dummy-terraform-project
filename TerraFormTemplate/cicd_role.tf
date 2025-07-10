@@ -25,7 +25,7 @@ resource "aws_iam_role" "github_actions_role"{
             },
             Action = "sts:AssumeRoleWithWebIdentity",
             Condition = {
-                stringEquals = {
+                StringEquals = {
                     "token.actions.githubusercontent.com:sub" = "repo:satya-just4p/dummy-terraform-project:ref:refs/heads/main"
                 }
             }
