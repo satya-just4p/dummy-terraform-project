@@ -1,9 +1,15 @@
-# Define the OIDC Provider
-resource "aws_iam_openid_connect_provider" "github"{
+# Define the OIDC Provider. 
+# The below code can be used if Identity Provider doesn't exists
+#resource "aws_iam_openid_connect_provider" "github"{
+#    url = "https://token.actions.githubusercontent.com"
+#    clientid_list = ["sts.amazonaws.com"]
+#    thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1",
+#    "1c58a3a8518e8759bf075b76b750d4f2df264fcd"] # GitHub's root Cert
+#}
+
+# When the Identity Provider already exists
+data "aws_iam_openid_connect_provider" "github"{
     url = "https://token.actions.githubusercontent.com"
-    clientid_list = ["sts.amazonaws.com"]
-    thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1",
-    "1c58a3a8518e8759bf075b76b750d4f2df264fcd"] # GitHub's root Cert
 }
 
 # Create IAM Role for GitHub actions
@@ -15,7 +21,7 @@ resource "aws_iam_role" "github_actions_role"{
         Statement = [{
             Effect = "Allow",
             Principal = {
-                Federated = aws_iam_openid_connect_provider.github.arn
+                Federated = data.aws_iam_openid_connect_provider.github.arn
             },
             Action = "sts:AssumeRoleWithWebIdentity",
             Condition = {
