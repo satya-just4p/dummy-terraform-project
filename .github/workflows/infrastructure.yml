@@ -81,16 +81,18 @@ jobs:
           cloud_front_id=$(terraform output -raw angular_cloudfront_distribution_id)
           api_url=$(terraform output -raw angular_base_api_url)
           s3_bucket_name=$(terraform output -raw s3_bucket_name)
-          cicd_access_key_id=$(terraform output -raw cicd_user_access_key_id)
-          cicd_secret_access_key=$(terraform output -raw cicd_user_secret_access_key)
+          # cicd_access_key_id=$(terraform output -raw cicd_user_access_key_id)
+          # cicd_secret_access_key=$(terraform output -raw cicd_user_secret_access_key)
           aws_region=$(terraform output -raw project_region)
+          angular_cicd_user_role=${terraform output -raw github_actions_role_arn}
 
           gh secret set CLOUD_DISTRIBUTION_ID -b "$cloud_front_id"
           gh secret set API_URL -b "$api_url"
           gh secret set S3_BUCKET_NAME -b "$s3_bucket_name"
           gh secret set AWS_REGION -b "$aws_region"
-          gh secret set AWS_ACCESS_KEY_ID -b "$cicd_access_key_id"
-          gh secret set AWS_SECRET_ACCESS_KEY -b "$cicd_secret_access_key"
+          # gh secret set AWS_ACCESS_KEY_ID -b "$cicd_access_key_id"
+          # gh secret set AWS_SECRET_ACCESS_KEY -b "$cicd_secret_access_key"
+          gh secret set ANGULAR_CICD_USER_ROLE -b "$angular_cicd_user_role"
 
           echo "======== GitHub Secrets updated successfully================"
 
