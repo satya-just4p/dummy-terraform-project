@@ -50,8 +50,8 @@ resource "aws_iam_role_policy" "cicid_user_inline_policy"{
 
         ],
         Resource = [
-            "arn:aws:s3::${var.angular_s3_bucket_name}",
-            "arn:aws:s3::${var.angular_s3_bucket_name}/*"
+            "arn:aws:s3:::${var.angular_s3_bucket_name}",
+            "arn:aws:s3:::${var.angular_s3_bucket_name}/*"
         ]
         },
         {
