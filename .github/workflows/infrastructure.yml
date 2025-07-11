@@ -84,7 +84,7 @@ jobs:
           # cicd_access_key_id=$(terraform output -raw cicd_user_access_key_id)
           # cicd_secret_access_key=$(terraform output -raw cicd_user_secret_access_key)
           aws_region=$(terraform output -raw project_region)
-          angular_cicd_user_role=${terraform output -raw github_actions_role_arn}
+          angular_cicd_user_role=$(terraform output -raw github_actions_role_arn)
 
           gh secret set CLOUD_DISTRIBUTION_ID -b "$cloud_front_id"
           gh secret set API_URL -b "$api_url"
