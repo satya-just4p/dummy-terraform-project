@@ -1,6 +1,7 @@
 using DummyAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Amazon.Lambda.AspNetCoreServer.Hosting;
+using DummyAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,11 +22,37 @@ builder.Services.AddSwaggerGen();
 //options.UseSqlServer(builder.Configuration.GetConnectionString("DummyDBConnectionStrings")));
 
 // Connection Strings modified for TerraForm Deployment and Local Environment
+// When using Lambda Environment Variable DB_CONNECTION_STRING for storing and retrieving the db credentials,
+// the below code can be used
+/*
 var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
     ?? builder.Configuration.GetConnectionString("DummyDBConnectionStrings");
+*/
 
-builder.Services.AddDbContext<dummyDbContext>(options =>
-options.UseSqlServer(connectionString));
+// Below is the code when using AWS Systems Manager Parameter Store to store and retrieve DB Credentials
+string connectionString = "";
+
+/*
+ * The below variable returns TRUE when the .Net Application is running inside the lambda function, because
+ * AWS automatically sets the environment variable AWS_LAMBDA_FUNCTION_NAME to the name of the lmabda function.
+ * FALSE when running locally or outside of Lambda, because this enviroment variable will be null or empty in this context.
+ */
+
+bool isLambda = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AWS_LAMBDA_FUNCTION_NAME"));
+
+if (isLambda)
+{
+    var dbService = new DbCredentialsService();
+	connectionString = await dbService.GetConnectionStringAsync();
+
+}
+else
+{
+	connectionString = builder.Configuration.GetConnectionString("DummyDBConnectionStrings");
+}
+
+ builder.Services.AddDbContext<dummyDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 // CORS definition goes here
 //builder.Services.AddCors(options =>

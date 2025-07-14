@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DummyAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b781d6a4668bbf4c45eb7cee5e3b1f72d9da53c7")]
 [assembly: System.Reflection.AssemblyProductAttribute("DummyAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DummyAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

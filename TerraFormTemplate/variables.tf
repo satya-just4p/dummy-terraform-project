@@ -43,6 +43,7 @@ variable "db_username"{
 }
 variable "db_password"{
     default = "dummydb_2025"
+    sensitive = true
 }
 variable "db_name"{
     default = "dummydb"

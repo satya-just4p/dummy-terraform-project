@@ -147,7 +147,7 @@ resource "aws_iam_policy" "bastion_s3_policy"{
     policy = jsonencode({
         Version = "2012-10-17",
         Statement = [{
-            Sid = "AllowBastionHostToAccessS3"
+            Sid = "AllowBastionHostToAccessS3",
             Effect = "Allow",
             Action = "s3:GetObject",
             Resource = "${aws_s3_bucket.secure_key_bucket.arn}/*"
@@ -165,6 +165,36 @@ resource "aws_iam_role_policy_attachment" "bastion_s3_attach"{
 
 }
 
+# IAM Policy for Bastion Host to access SSM Standard Parameter Store
+resource "aws_iam_policy" "bastion_ssm_access"{
+    name = "bastion-ssm-access"
+    description = "Allows Bastion Host to access SSM Parameter Store to fetch RDS Credentials"
+
+    policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [{
+            Sid = "AllowsBastionHostToAccessSSMParameter",
+            Effect = "Allow",
+            Action = ["ssm:GetParameter"],
+            Resource = "arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parameter/rds/*"
+        },
+        {
+            Sid = "AllowsBastionHostToDecryptSecuredStringParameter",
+            Effect = "Allow",
+            Action = ["kms:Decrypt"],
+            Resource = "*"
+            # To implement more Least Privilege
+            # Resource = "arn:aws:kms:${var.aws_region}:${data.aws_caller_identity.current.account_id}:key/alias/aws/ssm"
+        }
+        ]
+    }) 
+}
+
+# Attaching the above policy to an IAM Role
+resource "aws_iam_role_policy_attachment" "bastion_ssm_access_policy"{
+    role = aws_iam_role.bastion_iam_role.name
+    policy_arn = aws_iam_policy.bastion_ssm_access.arn
+}
 # EC2 Instance Profile
 resource "aws_iam_instance_profile" "bastion_instance_profile"{
     name = "bastion-instance-profile"
@@ -185,6 +215,8 @@ resource "aws_instance" "dummy_bastion_instance"{
 
     tags = {
         Name = "dummy-bastion-host"
+        Environment = "Dev"
+        Project = "dummyTerraFormProject"
     }
 
 }

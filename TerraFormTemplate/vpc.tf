@@ -1,6 +1,12 @@
 resource "aws_vpc" "dummy_vpc"{
     cidr_block = var.vpc_cidr
 
+    # Below code is necessary to enable VPC's DNSHostNames and DNSSupport
+    # so that VPC Endpoint for SSM and Lambda can communicate with each other
+    
+    enable_dns_support = true
+    enable_dns_hostnames = true
+
     tags = {
         Name = "dummy-vpc"
     }
@@ -62,3 +68,51 @@ resource "aws_route_table_association" "dummy_routetable_assoc"{
 
 }
 
+# Below code creates SG for VPC Endpoint that allows lambda function to access SSM
+resource "aws_security_group" "vpc_endpoint_sg"{
+    name = "vpc-endpoint-sg"
+    description = "Security Group for VPC Endpoint to SSM"
+    vpc_id = aws_vpc.dummy_vpc.id
+
+    tags = {
+        Name = "vpc-endpoint-sg"
+    }
+   
+}
+
+resource "aws_vpc_security_group_ingress_rule" "vpc_endpoint_ingress"{
+    security_group_id = aws_security_group.vpc_endpoint_sg.id
+    description = "Allows Lambda to access VPC Endpoint for SSM"
+
+    from_port = 443
+    to_port = 443
+    ip_protocol = "tcp"
+    referenced_security_group_id = aws_security_group.lambda_dummy_sg.id
+}
+
+resource "aws_vpc_security_group_egress_rule" "vpc_endpoint_egress"{
+    security_group_id = aws_security_group.vpc_endpoint_sg.id
+
+    from_port = 0
+    to_port = 0
+    ip_protocol = "-1"
+    cidr_ipv4 = "0.0.0.0/0"
+}
+
+# The below code creates a VPC endpoint that enables Lambda to access SSM 
+# as Lambda is in Private Subnet
+resource "aws_vpc_endpoint" "ssm"{
+    vpc_id = aws_vpc.dummy_vpc.id
+    service_name = "com.amazonaws.${var.aws_region}.ssm"
+    vpc_endpoint_type = "Interface"
+    subnet_ids = [aws_subnet.dummy_private_subnet.id]
+    security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
+  
+    private_dns_enabled = true
+    
+    tags = {
+        Name = "ssm VPC Interface Endpoint"
+        Environment = "Dev/Test"
+    }
+
+}

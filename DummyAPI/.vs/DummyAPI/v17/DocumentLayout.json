@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|d:\\satyapriya\\projects\\testing\\dummyterraformproject\\dummyapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|d:\\satyapriya\\projects\\testing\\dummyterraformproject\\dummyapi\\models\\dummytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|solutionrelative:models\\dummytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|d:\\satyapriya\\projects\\testing\\dummyterraformproject\\dummyapi\\services\\dbcredentialsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|solutionrelative:services\\dbcredentialsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|d:\\satyapriya\\projects\\testing\\dummyterraformproject\\dummyapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|d:\\satyapriya\\projects\\testing\\dummyterraformproject\\dummyapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|d:\\satyapriya\\projects\\testing\\dummyterraformproject\\dummyapi\\controllers\\dummycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|solutionrelative:controllers\\dummycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|d:\\satyapriya\\projects\\testing\\dummyterraformproject\\dummyapi\\models\\dummytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|solutionrelative:models\\dummytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{285BC684-8E67-4A7C-B2C1-DD265A3919DD}|DummyAPI.csproj|d:\\satyapriya\\projects\\testing\\dummyterraformproject\\dummyapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -30,11 +34,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "DbCredentialsService.cs",
+              "DocumentMoniker": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\Services\\DbCredentialsService.cs",
+              "RelativeDocumentMoniker": "Services\\DbCredentialsService.cs",
+              "ToolTip": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\Services\\DbCredentialsService.cs",
+              "RelativeToolTip": "Services\\DbCredentialsService.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAYwBgAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-13T09:56:33.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "launchSettings.json",
               "DocumentMoniker": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -52,27 +69,25 @@
               "RelativeDocumentMoniker": "Controllers\\dummyController.cs",
               "ToolTip": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\Controllers\\dummyController.cs",
               "RelativeToolTip": "Controllers\\dummyController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABsAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T15:24:18.997Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-17T15:24:18.997Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABgAAABNAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T20:29:36.4Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-16T20:29:36.4Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "dummyTable.cs",
               "DocumentMoniker": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\Models\\dummyTable.cs",
               "RelativeDocumentMoniker": "Models\\dummyTable.cs",
@@ -80,21 +95,19 @@
               "RelativeToolTip": "Models\\dummyTable.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T20:26:21.92Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-16T20:26:21.92Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-16T20:03:15.844Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-16T20:03:15.844Z"
             }
           ]
         }

@@ -37,6 +37,12 @@ output "angular_cloudfront_distribution_id"{
     value = aws_cloudfront_distribution.angular_cdn.id
 }
 
+output "rds_address"{
+    description = "Amazon RDS endpoint for database connection without the port"
+    value = aws_db_instance.dummy_db_instance.address
+    
+}
+
 # Commented URL used only for Local Testing
 
 
@@ -72,10 +78,7 @@ output "dummy_bastion_host_ip"{
 #    value = aws_db_instance.dummy_db_instance.endpoint
 #}
 
-#output "rds_address"{
-#    description = "Amazon RDS endpoint for database connection without the port"
-#    value = aws_db_instance.dummy_db_instance.address
-#}
+
 
 
 # Access Key and Secret Access Key output

@@ -12,6 +12,8 @@ D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\publish\Amazon.Lam
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\publish\Amazon.Lambda.Logging.AspNetCore.dll
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\publish\Amazon.Lambda.RuntimeSupport.dll
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\publish\Amazon.Lambda.Serialization.SystemTextJson.dll
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\publish\AWSSDK.Core.dll
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\publish\AWSSDK.SimpleSystemsManagement.dll
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\publish\Azure.Core.dll
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\publish\Azure.Identity.dll
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\publish\Microsoft.Bcl.AsyncInterfaces.dll

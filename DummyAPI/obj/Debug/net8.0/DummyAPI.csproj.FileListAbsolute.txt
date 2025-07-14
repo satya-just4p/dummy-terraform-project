@@ -308,3 +308,12 @@ D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Debug\net8.0\r
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Debug\net8.0\DummyAPI.pdb
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Debug\net8.0\DummyAPI.genruntimeconfig.cache
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Debug\net8.0\ref\DummyAPI.dll
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Debug\net8.0\publish\web.config
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Debug\net8.0\publish\appsettings.Development.json
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Debug\net8.0\publish\appsettings.json
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Debug\net8.0\publish\DummyAPI.deps.json
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Debug\net8.0\publish\DummyAPI.runtimeconfig.json
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Debug\net8.0\publish\DummyAPI.staticwebassets.endpoints.json
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Debug\net8.0\AWSSDK.Core.dll
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Debug\net8.0\AWSSDK.SimpleSystemsManagement.dll
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Debug\net8.0\DummyAPI.sourcelink.json

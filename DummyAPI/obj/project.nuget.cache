@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VI4n+nd1a00=",
+  "dgSpecHash": "A1xE2Zbk7eo=",
   "success": true,
   "projectFilePath": "D:\\Satyapriya\\Projects\\Testing\\DummyTerraFormProject\\DummyAPI\\DummyAPI.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,8 @@
     "C:\\Users\\ssaty\\.nuget\\packages\\amazon.lambda.logging.aspnetcore\\4.0.0\\amazon.lambda.logging.aspnetcore.4.0.0.nupkg.sha512",
     "C:\\Users\\ssaty\\.nuget\\packages\\amazon.lambda.runtimesupport\\1.13.1\\amazon.lambda.runtimesupport.1.13.1.nupkg.sha512",
     "C:\\Users\\ssaty\\.nuget\\packages\\amazon.lambda.serialization.systemtextjson\\2.4.4\\amazon.lambda.serialization.systemtextjson.2.4.4.nupkg.sha512",
+    "C:\\Users\\ssaty\\.nuget\\packages\\awssdk.core\\4.0.0.15\\awssdk.core.4.0.0.15.nupkg.sha512",
+    "C:\\Users\\ssaty\\.nuget\\packages\\awssdk.simplesystemsmanagement\\4.0.2.2\\awssdk.simplesystemsmanagement.4.0.2.2.nupkg.sha512",
     "C:\\Users\\ssaty\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\ssaty\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\ssaty\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

@@ -152,3 +152,6 @@ D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Release\net8.0
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Release\net8.0\DummyAPI.pdb
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Release\net8.0\DummyAPI.genruntimeconfig.cache
 D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Release\net8.0\ref\DummyAPI.dll
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Release\net8.0\AWSSDK.Core.dll
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\bin\Release\net8.0\AWSSDK.SimpleSystemsManagement.dll
+D:\Satyapriya\Projects\Testing\DummyTerraFormProject\DummyAPI\obj\Release\net8.0\DummyAPI.sourcelink.json
