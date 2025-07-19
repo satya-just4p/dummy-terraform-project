@@ -30,6 +30,28 @@ resource "aws_vpc_security_group_ingress_rule" "rdp_access_from_my_ip"{
     cidr_ipv4 = "91.42.30.197/32"
 }
 
+# Ansible Access from my IP to Bastion Host
+resource "aws_vpc_security_group_ingress_rule" "ansible_access_from_my_ip"{
+    security_group_id = aws_security_group.bastion_dummy_sg.id
+    description = "Allows Ansible to access Bastion Host from my IP"
+
+    from_port = 5985
+    to_port = 5985
+    ip_protocol = "tcp"
+    cidr_ipv4 = "91.42.30.197/32"
+}
+
+# Ansible Access from my IP to Bastion Host
+resource "aws_vpc_security_group_ingress_rule" "ansible_access_from_ip_5986"{
+    security_group_id = aws_security_group.bastion_dummy_sg.id
+    description = "Allows Ansible to access Bastion Host from my IP but from 5986"
+
+    from_port = 5986
+    to_port = 5986
+    ip_protocol = "tcp"
+    cidr_ipv4 = "91.42.30.197/32"
+}
+
 resource "aws_vpc_security_group_egress_rule" "bastion_internet_access"{
     description = "Allows Internet Access for Bastion"
     security_group_id = aws_security_group.bastion_dummy_sg.id
@@ -212,6 +234,21 @@ resource "aws_instance" "dummy_bastion_instance"{
     vpc_security_group_ids = [aws_security_group.bastion_dummy_sg.id]
     associate_public_ip_address = true
     key_name = aws_key_pair.bastion_keypair.key_name
+
+    # UserData section starts here
+    # The below commands enables WinRM on the bastion Host
+    # that makes this Ansible Ready
+
+    user_data = <<-EOF
+                <powershell>
+                winrm quickconfig -quiet
+                winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+                winrm set winrm/config/service/auth '@{Basic="true"}'
+                netsh advfirewall firewall add rule name="Ansible RM" dir=in action=allow protocol=TCP localport=5985
+                Set-Service -Name "WinRM" -StartupType Automatic
+                Start-Service -Name "WinRM"
+                </powershell>
+                EOF
 
     tags = {
         Name = "dummy-bastion-host"
