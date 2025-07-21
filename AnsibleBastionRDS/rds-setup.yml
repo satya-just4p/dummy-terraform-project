@@ -1,0 +1,56 @@
+- name: Configure SQL Server RDS
+  hosts: windows
+  gather_facts: no
+
+  vars:
+   rds_endpoint: "{{ lookup('env','RDS_HOST') }}"
+   rds_username: "{{ lookup('env','RDS_USERNAME') }}"
+   rds_password: "{{ lookup('env','RDS_PASSWORD') }}"
+   rds_db_name: "{{ lookup('env', 'RDS_DB_NAME') }}"
+   sql_scriptTable_path: "C:\\scripts\\CreateDummyDbTables.sql"
+
+  tasks:
+
+   - name: Creates script folder on EC2
+     win_file:
+      path: "C:\\scripts"
+      state: directory
+
+   - name: Pause till directory is created
+     pause:
+      seconds: 10
+
+   - name: Uploads Table schema file to EC2 Instance
+     win_copy:
+      src: "scripts/CreateDummyDbTables.sql"
+      dest: "{{ sql_scriptTable_path }}"
+
+   - name: Execute Create Database Script using sqlcmd
+     win_shell: >
+       $query = @"
+       IF NOT EXISTS (select name from sys.databases where name = '{{ rds_db_name }}')
+       BEGIN
+         Create database '{{ rds_db_name }}'
+       END
+       "@
+       sqlcmd -S "{{ rds_endpoint }}" -U "{{ rds_username }}" -P "{{ rds_password }}"
+       -Q $query
+     register: sqlcmd_result
+     ignore_errors: true
+
+
+   - name: Execute Create Tables Script using sqlcmd
+     win_shell: >
+      sqlcmd -S "{{ rds_endpoint }}" -U "{{ rds_username }}" -P "{{ rds_password }}"
+      -d "{{ rds_db_name }}" -i "{{ sql_scriptTable_path }}"
+     register: sqlcmd_result
+     ignore_errors: true
+
+   - name: Display sqlcmd Output
+     debug:
+      var: sqlcmd_result.stdout
+
+   - name: Fail gracefully if execution failed
+     fail:
+      msg: "Schema Execution Failed. See Output above"
+     when: sqlcmd_result.rc != 0

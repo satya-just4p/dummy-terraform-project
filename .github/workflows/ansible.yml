@@ -1,0 +1,90 @@
+name: Ansible CI Pipeline
+on:
+  workflow_run:
+    workflows:
+      - "Infrastructure CI Pipeline"
+    types:
+        - completed
+permissions:
+        id-token: write
+        contents: read
+
+jobs:
+  build:
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
+
+    name: Run Ansible Playbooks
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: AnsibleBastionRDS
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::578160920339:role/github-actions-oidc-role
+          aws-region: ${{ secrets.AWS_REGION}}
+
+      - name: Get Bastion Host IP and Password
+        env:
+          BASTION_HOST_IP: ${{ github.event.workflow_run.outputs.bastion_host_ip }}
+          BASTION_PASSWORD: ${{ github.event.workflow_run.outputs.password }}
+        run: |
+          echo "Bastion IP: $BASTION_HOST_IP"
+          echo "Password: [REDACTED]"
+          # Generate inventory.ini for Ansible
+          echo "[windows]" > inventory.ini
+          echo "$BASTION_HOST_IP" >> inventory.ini 
+          echo "ansible_user=Administrator" >> inventory.ini 
+          echo "ansible_password=$BASTION_PASSWORD" >> inventory.ini
+          echo "ansible_connection=winrm" >> inventory.ini 
+          echo "ansible_port=5985" >> inventory.ini 
+          echo "ansible_winrm_transport=basic" >> inventory.ini 
+          echo "ansible_winrm_server_cert_validation=ignore" >> inventory.ini
+
+      - name: Get RDS credentials from SSM Parameter Store
+        id: rdscreds
+        run: |
+          creds=$(aws ssm get-parameters --names "/rds/host" "/rds/username" "/rds/password" "/rds/name" --with-decryption)
+          rds_host=$(echo "$creds" | jq -r '.Parameters[] | select(.Name=="/rds/host") | .Value')
+          rds_username=$(echo "$creds" | jq .r '.Parameters[] | select(.Name=="/rds/username") | .Value')
+          rds_password=$(echo "$creds" | jq -r '.Parameters[] | select(.Name== "/rds/password") | .Value')
+          rds_db_name=$(echo "$creds" | jq -r '.Parameters[] | select(.Name== "/rds/name") | .Value')
+          echo "rds_host=$rds_host" >> $GITHUB_OUTPUT
+          echo "rds_username=$rds_username" >> $GITHUB_OUTPUT
+          echo "rds_password=$rds_password" >> $GITHUB_OUTPUT
+          echo "rds_db_name=$rds_db_name" >> $GITHUB_OUTPUT
+
+      - name: Install Ansible and WinRM
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip3 install ansible "pywinrm[credssp]"
+
+      
+      - name: Ensure WINRM is correctly configured
+        run: |
+          ansible windows -i inventory.ini -m win_ping
+      
+      - name: Run test-win-play1.yml (basic connectivity)
+        run: |
+          ansible-playbook -i inventory.ini test-win-play1.yml
+
+      - name: Ensures sqlcmd is installed
+        run: |
+          ansible-playbook -i inventory.ini ensure-sqlcmd1.yml
+
+      - name: Configures Sql Server
+        env:
+          RDS_HOST: ${{ steps.rdscreds.outputs.rds_host }}
+          RDS_USERNAME: ${{ steps.rdscreds.outputs.rds_username }}
+          RDS_PASSWORD: ${{ steps.rdscreds.output.rds_password }}
+          RDS_DB_NAME: ${{ steps.rdscreds.outputs.rds_db_name }}
+        run: |
+          ansible-playbook -i inventory.ini rds-setup.yml

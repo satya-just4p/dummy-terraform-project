@@ -37,6 +37,19 @@ output "angular_cloudfront_distribution_id"{
     value = aws_cloudfront_distribution.angular_cdn.id
 }
 
+
+# Output of Bastion Host Public IP
+output "dummy_bastion_host_ip"{
+    description = "Public IP of the Bastion Host for RDP Access"
+    value = aws_instance.dummy_bastion_instance.public_ip
+}
+
+# Output the Instance Id of Bastion Host
+output "dummy_bastion_host_id"{
+    description = "Instance Id of the Bastion Host for Password"
+    value= aws_instance.dummy_bastion_instance.id
+}
+
 output "rds_address"{
     description = "Amazon RDS endpoint for database connection without the port"
     value = aws_db_instance.dummy_db_instance.address
@@ -62,10 +75,6 @@ output "rds_address"{
 #    description = "Security Group ID for Bastion Host"
 #    value = aws_security_group.bastion_dummy_sg.id
 #}
-output "dummy_bastion_host_ip"{
-    description = "Public IP of the Bastion Host for SSH Access"
-    value = aws_instance.dummy_bastion_instance.public_ip
-}
 
 # output "bastion_ssh_command"{
 #    description = "SSH command to connect to the Bastion Host"
@@ -77,9 +86,6 @@ output "dummy_bastion_host_ip"{
 #    description = "Amazon RDS endpoint for database connection"
 #    value = aws_db_instance.dummy_db_instance.endpoint
 #}
-
-
-
 
 # Access Key and Secret Access Key output
 #output "cicd_user_access_key_id"{

@@ -1,0 +1,10 @@
+- name: Test Basic Win Command
+  hosts: windows
+  gather_facts: no
+  tasks:
+    - name: Test Echo Command on Windows EC2
+      win_shell: echo 'Hello World'
+      register: echo_result
+    - name: Show the echo output
+      debug:
+       var: echo_result.stdout

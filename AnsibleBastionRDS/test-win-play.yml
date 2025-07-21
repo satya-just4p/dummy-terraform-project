@@ -1,0 +1,6 @@
+- name: Test Basic Win Command
+  hosts: windows
+  gather_facts: no
+  tasks:
+   - name: Run Hostname on Windows EC2
+     win_command: hostname

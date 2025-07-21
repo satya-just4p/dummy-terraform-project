@@ -63,7 +63,7 @@ jobs:
           echo "============= TerraForm Outputs ============="
           terraform output -json
       #- name: Display selected Terraform Outputs
-       # run: |
+        #run: |
         #  echo "CloudDistribution Id: $(terraform output -raw angular_cloudfront_distribution_id)"
          # echo "API Gateway URL: $(terraform output -raw angular_base_api_url)"
           #echo "S3 Bucket name: $(terraform output -raw s3_bucket_name)"
@@ -72,6 +72,33 @@ jobs:
           #echo "AWS Secret Key for Angular CI/CD:"
           #terraform output -raw cicd_user_secret_access_key
           #echo "=============== Terraform Outputs ends ==============="
+
+      - name: Extract Terraform Outputs
+        id: extract
+        run: |
+          echo "bastion_host_ip=$(terraform output -raw dummy_bastion_host_ip)" >> $GITHUB_OUTPUT
+          echo "bastion_host_instance_id=$(terraform output -raw dummy_bastion_host_id)" >> $GITHUB_OUTPUT
+
+      - name: Download .pem file from S3
+        id: download_pem
+        run: |
+          aws s3 cp s3://bastion-private-key.1981/dummy-bastion-key.pem dummy-bastion-key.pem
+          chmod 400 dummy-bastion-key.pem
+
+      - name: Decrypt Bastion Windows Password
+        id: decrypt_pw
+        run: |
+          password=$(aws ec2 get-password-data \
+          --instance-id ${{ steps.extract.outputs.bastion_host_instance_id }} \
+          --priv-launch-key dummy-bastion-key.pem \
+          --query 'PasswordData' \
+          --output text)
+          echo "password=$password" >> $GITHUB_OUTPUT
+
+      - name: Show result (Debug Only)
+        run: |
+          echo "Bastion IP:${{ steps.extract.outputs.bastion_host_ip }}"
+          echo "Bastion Password:${{ steps.decrypt_pw.outputs.password }}"
 
       - name: Export Terraform Outputs as GitHub Secrets
         env:
