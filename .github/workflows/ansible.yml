@@ -53,7 +53,7 @@ jobs:
         run: |
           creds=$(aws ssm get-parameters --names "/rds/host" "/rds/username" "/rds/password" "/rds/name" --with-decryption)
           rds_host=$(echo "$creds" | jq -r '.Parameters[] | select(.Name=="/rds/host") | .Value')
-          rds_username=$(echo "$creds" | jq .r '.Parameters[] | select(.Name=="/rds/username") | .Value')
+          rds_username=$(echo "$creds" | jq -r '.Parameters[] | select(.Name=="/rds/username") | .Value')
           rds_password=$(echo "$creds" | jq -r '.Parameters[] | select(.Name== "/rds/password") | .Value')
           rds_db_name=$(echo "$creds" | jq -r '.Parameters[] | select(.Name== "/rds/name") | .Value')
           echo "rds_host=$rds_host" >> $GITHUB_OUTPUT
