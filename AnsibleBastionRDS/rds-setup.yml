@@ -27,14 +27,7 @@
 
    - name: Execute Create Database Script using sqlcmd
      win_shell: >
-       $query = @"
-       IF NOT EXISTS (select name from sys.databases where name = '{{ rds_db_name }}')
-       BEGIN
-         Create database '{{ rds_db_name }}'
-       END
-       "@
-       sqlcmd -S "{{ rds_endpoint }}" -U "{{ rds_username }}" -P "{{ rds_password }}"
-       -Q $query
+       sqlcmd -S "{{ rds_endpoint }}" -U "{{ rds_username }}" -P "{{ rds_password }}" -Q "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = '{{ rds_db_name }}') BEGIN CREATE DATABASE [{{ rds_db_name }}] END"
      register: sqlcmd_result
      ignore_errors: true
 
