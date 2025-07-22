@@ -90,7 +90,7 @@ jobs:
         run: |
           password=$(aws ec2 get-password-data \
           --instance-id ${{ steps.extract.outputs.bastion_host_instance_id }} \
-          --priv-launch-key dummy-bastion-key.txt \
+          --priv-launch-key dummy-bastion-key.pem \
           --query 'PasswordData' \
           --output text)
           echo "password=$password" >> $GITHUB_OUTPUT
