@@ -1,15 +1,9 @@
 name: Ansible CI Pipeline
 on:
-  workflow_dispatch:
-    
-  #workflow_run:
-    #workflows:
-    #  - "Infrastructure CI Pipeline"
-    #types:
-    #    - completed
+    workflow_dispatch:
 permissions:
-        id-token: write
-        contents: read
+    id-token: write
+    contents: read
 
 jobs:
   build:
