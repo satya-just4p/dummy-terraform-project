@@ -90,7 +90,7 @@ jobs:
         run: |
           password=$(aws ec2 get-password-data \
           --instance-id ${{ steps.extract.outputs.bastion_host_instance_id }} \
-          --priv-launch-key dummy-bastion-key.pem \
+          --priv-launch-key dummy-bastion-key.txt \
           --query 'PasswordData' \
           --output text)
           echo "password=$password" >> $GITHUB_OUTPUT
@@ -103,6 +103,8 @@ jobs:
       - name: Export Terraform Outputs as GitHub Secrets
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
+          BASTION_IP: ${{steps.extract.outputs.bastion_host_ip}}
+          BASTION_PASSWORD: ${{steps.decrypt_pw.outputs.password}}
         run: |
           echo "=======Exporting Terraform Outputs as GitHub Secrets======="
           cloud_front_id=$(terraform output -raw angular_cloudfront_distribution_id)
@@ -112,8 +114,14 @@ jobs:
           # cicd_secret_access_key=$(terraform output -raw cicd_user_secret_access_key)
           aws_region=$(terraform output -raw project_region)
           angular_cicd_user_role=$(terraform output -raw github_actions_role_arn)
-          bastion_id=$Bastion_IP
-          bastion_password=$Bastion_Password
+          
+          bastion_id=$BASTION_IP
+          bastion_password=$BASTION_PASSWORD
+
+          if [ -z "$bastion_id" ] || [ -z "$bastion_password" ];then
+            echo "Cannot save to Secrets. Bastion IP or Bastion Password is empty"
+            exit 1
+          fi
 
           gh secret set CLOUD_DISTRIBUTION_ID -b "$cloud_front_id"
           gh secret set API_URL -b "$api_url"
@@ -122,8 +130,8 @@ jobs:
           # gh secret set AWS_ACCESS_KEY_ID -b "$cicd_access_key_id"
           # gh secret set AWS_SECRET_ACCESS_KEY -b "$cicd_secret_access_key"
           gh secret set ANGULAR_CICD_USER_ROLE -b "$angular_cicd_user_role"
-          gh secret set BASTION_IP -b "$Bastion_IP"
-          gh secret set BASTION_PASSWORD -b "$Bastion_Password"
+          gh secret set BASTION_IP -b "$bastion_id"
+          gh secret set BASTION_PASSWORD -b "$bastion_password"
 
           echo "======== GitHub Secrets updated successfully================"
 

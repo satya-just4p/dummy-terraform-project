@@ -53,6 +53,7 @@ jobs:
       - name: Get RDS credentials from SSM Parameter Store
         id: rdscreds
         run: |
+          sudo apt-get install -y jq
           creds=$(aws ssm get-parameters --names "/rds/host" "/rds/username" "/rds/password" "/rds/name" --with-decryption)
           rds_host=$(echo "$creds" | jq -r '.Parameters[] | select(.Name=="/rds/host") | .Value')
           rds_username=$(echo "$creds" | jq -r '.Parameters[] | select(.Name=="/rds/username") | .Value')
@@ -86,7 +87,7 @@ jobs:
         env:
           RDS_HOST: ${{ steps.rdscreds.outputs.rds_host }}
           RDS_USERNAME: ${{ steps.rdscreds.outputs.rds_username }}
-          RDS_PASSWORD: ${{ steps.rdscreds.output.rds_password }}
+          RDS_PASSWORD: ${{ steps.rdscreds.outputs.rds_password }}
           RDS_DB_NAME: ${{ steps.rdscreds.outputs.rds_db_name }}
         run: |
           ansible-playbook -i inventory.ini rds-setup.yml
