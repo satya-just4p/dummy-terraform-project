@@ -34,8 +34,8 @@ jobs:
       - name: Get Bastion Host IP and Password
         shell: bash
         env:
-          BASTION_HOST_IP: ${{ github.event.workflow_run.outputs.bastion_host_ip }}
-          BASTION_PASSWORD: ${{ github.event.workflow_run.outputs.password }}
+          BASTION_HOST_IP: ${{secrets.BASTION_IP}}
+          BASTION_PASSWORD: ${{secrets.BASTION_PASSWORD}}
         run: |
           echo "Bastion IP: $BASTION_HOST_IP"
           echo "Password: [REDACTED]"
@@ -80,7 +80,7 @@ jobs:
 
       - name: Ensures sqlcmd is installed
         run: |
-          ansible-playbook -i inventory.ini ensure-sqlcmd1.yml
+          ansible-playbook -i inventory.ini ensure-sqlcmd.yml
 
       - name: Configures Sql Server
         env:

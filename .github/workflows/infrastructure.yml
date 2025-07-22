@@ -97,8 +97,8 @@ jobs:
 
       - name: Show result (Debug Only)
         run: |
-          echo "Bastion IP:${{ steps.extract.outputs.bastion_host_ip }}"
-          echo "Bastion Password:${{ steps.decrypt_pw.outputs.password }}"
+          echo "Bastion_IP:${{ steps.extract.outputs.bastion_host_ip }}"
+          echo "Bastion_Password:${{ steps.decrypt_pw.outputs.password }}"
 
       - name: Export Terraform Outputs as GitHub Secrets
         env:
@@ -112,6 +112,8 @@ jobs:
           # cicd_secret_access_key=$(terraform output -raw cicd_user_secret_access_key)
           aws_region=$(terraform output -raw project_region)
           angular_cicd_user_role=$(terraform output -raw github_actions_role_arn)
+          bastion_id=$Bastion_IP
+          bastion_password=$Bastion_Password
 
           gh secret set CLOUD_DISTRIBUTION_ID -b "$cloud_front_id"
           gh secret set API_URL -b "$api_url"
@@ -120,6 +122,8 @@ jobs:
           # gh secret set AWS_ACCESS_KEY_ID -b "$cicd_access_key_id"
           # gh secret set AWS_SECRET_ACCESS_KEY -b "$cicd_secret_access_key"
           gh secret set ANGULAR_CICD_USER_ROLE -b "$angular_cicd_user_role"
+          gh secret set BASTION_IP -b "$Bastion_IP"
+          gh secret set BASTION_PASSWORD -b "$Bastion_Password"
 
           echo "======== GitHub Secrets updated successfully================"
 
