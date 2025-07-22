@@ -38,7 +38,8 @@ resource "aws_vpc_security_group_ingress_rule" "ansible_access_from_my_ip"{
     from_port = 5985
     to_port = 5985
     ip_protocol = "tcp"
-    cidr_ipv4 = "91.42.30.197/32"
+    #cidr_ipv4 = "91.42.30.197/32"
+    cidr_ipv4 = "0.0.0.0/0"
 }
 
 # Ansible Access from my IP to Bastion Host
@@ -49,7 +50,8 @@ resource "aws_vpc_security_group_ingress_rule" "ansible_access_from_ip_5986"{
     from_port = 5986
     to_port = 5986
     ip_protocol = "tcp"
-    cidr_ipv4 = "91.42.30.197/32"
+    #cidr_ipv4 = "91.42.30.197/32"
+    cidr_ipv4 = "0.0.0.0/0"
 }
 
 resource "aws_vpc_security_group_egress_rule" "bastion_internet_access"{
